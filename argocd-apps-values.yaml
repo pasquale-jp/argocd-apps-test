@@ -9,12 +9,13 @@ applications:
       - chart: argo-cd
         repoURL: https://argoproj.github.io/argo-helm
         targetRevision: 6.2.1
-      - repoURL: https://github.com/pasquale-jp/argocd-apps-test.git
         helm:
           version: v3
           valueFiles:
-            - argocd-values.yaml
+            - $values/argocd-values.yaml
+      - repoURL: https://github.com/pasquale-jp/argocd-apps-test.git
         targetRevision: HEAD
+        ref: values
     syncPolicy:
       automated:
         selfHeal: true
