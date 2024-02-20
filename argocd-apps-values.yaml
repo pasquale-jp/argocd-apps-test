@@ -10,7 +10,10 @@ applications:
         repoURL: https://argoproj.github.io/argo-helm
         targetRevision: 6.2.1
       - repoURL: https://github.com/pasquale-jp/argocd-apps-test.git
-        path: argocd-values.yaml
+        helm:
+          version: v3
+          valueFiles:
+            - argocd-values.yaml
         targetRevision: HEAD
     syncPolicy:
       automated:
