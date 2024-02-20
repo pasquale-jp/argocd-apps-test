@@ -62,6 +62,7 @@ applications:
         prune: true
       syncOptions:
         - ApplyOutOfSyncOnly=true
+        - CreateNamespace=true
 projects:
   - name: argocd
     namespace: argocd
