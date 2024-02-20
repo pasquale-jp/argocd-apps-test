@@ -46,23 +46,23 @@ applications:
         prune: true
       syncOptions:
         - ApplyOutOfSyncOnly=true
-  - name: nginx
-    namespace: nginx
-    destination:
-      namespace: nginx
-      server: https://kubernetes.default.svc
-    project: argocd
-    sources:
-      - chart: nginx-ingress
-        repoURL: https://helm.nginx.com/stable
-        targetRevision: 0.17.1
-    syncPolicy:
-      automated:
-        selfHeal: true
-        prune: true
-      syncOptions:
-        - CreateNamespace=true
-        - ApplyOutOfSyncOnly=true
+  # - name: nginx
+  #   namespace: nginx
+  #   destination:
+  #     namespace: nginx
+  #     server: https://kubernetes.default.svc
+  #   project: argocd
+  #   sources:
+  #     - chart: nginx-ingress
+  #       repoURL: https://helm.nginx.com/stable
+  #       targetRevision: 0.17.1
+  #   syncPolicy:
+  #     automated:
+  #       selfHeal: true
+  #       prune: true
+  #     syncOptions:
+  #       - CreateNamespace=true
+  #       - ApplyOutOfSyncOnly=true
 projects:
   - name: argocd
     namespace: argocd
