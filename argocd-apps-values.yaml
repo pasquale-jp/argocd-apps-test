@@ -32,7 +32,7 @@ applications:
     sources:
       - chart: argocd-apps
         repoURL: https://argoproj.github.io/argo-helm
-        targetRevision: 6.2.1
+        targetRevision: 1.6.1
         helm:
           version: v3
           valueFiles:
