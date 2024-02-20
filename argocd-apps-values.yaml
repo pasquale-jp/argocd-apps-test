@@ -1,0 +1,40 @@
+applications:
+  - name: argocd
+    namespace: argocd
+    destination:
+      namespace: argocd
+      server: https://kubernetes.default.svc
+    project: argocd
+    sources:
+      - chart: argo-cd
+        repoURL: https://argoproj.github.io/argo-helm
+        targetRevision: 6.2.1
+      - repoURL: https://github.com/pasquale-jp/argocd-apps-test.git
+        path: argocd-values.yaml
+        targetRevision: HEAD
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true
+      syncOptions:
+        - CreateNamespace=true
+        - ApplyOutOfSyncOnly=true
+projects:
+  - name: argocd
+    namespace: argocd
+    additionalLabels: {}
+    additionalAnnotations: {}
+    description: ArgoCD Project
+    sourceRepos:
+      - 'https://argoproj.github.io/argo-helm'
+    destinations:
+      - namespace: argocd
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+    orphanedResources:
+      warn: false
+applicationsets: []
+itemTemplates: []
+extensions: []
