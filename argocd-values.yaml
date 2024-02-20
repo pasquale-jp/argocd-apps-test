@@ -55,8 +55,7 @@ server:
   metrics:
     enabled: false
   ingress:
-    enabled: true
-
+    enabled: false
 
 applicationSet:
   enabled: false
