@@ -1,0 +1,65 @@
+crds:
+  keep: false
+
+configs:
+  cm:
+    exec.enabled: true
+  params:
+    server.insecure: true
+
+controller:
+  resources:
+    requests:
+      memory: "320Mi"
+      cpu: "150m"
+    limits:
+      memory: "384Mi"
+  metrics:
+    enabled: false
+
+dex:
+  enabled: false
+
+redis:
+  resources:
+    requests:
+      memory: "16Mi"
+      cpu: "10m"
+    limits:
+      memory: "32Mi"
+  metrics:
+    enabled: false
+
+redis-ha:
+  enabled: false
+
+repoServer:
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+  metrics:
+    enabled: false
+
+server:
+  extraArgs:
+    - --insecure
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "150m"
+    limits:
+      memory: "256Mi"
+  metrics:
+    enabled: false
+  ingress:
+    enabled: true
+
+
+applicationSet:
+  enabled: false
+
+notifications:
+  enabled: false
