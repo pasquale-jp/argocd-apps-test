@@ -26,7 +26,8 @@ projects:
     additionalAnnotations: {}
     description: ArgoCD Project
     sourceRepos:
-      - 'https://argoproj.github.io/argo-helm'
+      - https://argoproj.github.io/argo-helm
+      - https://github.com/pasquale-jp/argocd-apps-test.git
     destinations:
       - namespace: argocd
         server: https://kubernetes.default.svc
