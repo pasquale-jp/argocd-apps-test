@@ -46,6 +46,23 @@ applications:
         prune: true
       syncOptions:
         - ApplyOutOfSyncOnly=true
+  - name: gloo
+    namespace: argocd
+    destination:
+      namespace: gloo-system
+      server: https://kubernetes.default.svc
+    project: jp-system
+    sources:
+      - chart: gloo
+        repoURL: https://storage.googleapis.com/solo-public-helm
+        targetRevision: v1.16.4
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true
+      syncOptions:
+        - CreateNamespace=true
+        - ApplyOutOfSyncOnly=true
 projects:
   - name: jp-system
     namespace: argocd
@@ -55,8 +72,11 @@ projects:
     sourceRepos:
       - https://argoproj.github.io/argo-helm
       - https://github.com/pasquale-jp/argocd-apps-test.git
+      - https://storage.googleapis.com/solo-public-helm
     destinations:
       - namespace: argocd
+        server: https://kubernetes.default.svc
+      - namespace: gloo-system
         server: https://kubernetes.default.svc
     clusterResourceWhitelist:
       - group: '*'
