@@ -47,7 +47,7 @@ applications:
       syncOptions:
         - ApplyOutOfSyncOnly=true
 projects:
-  - name: argocd
+  - name: jp-system
     namespace: argocd
     additionalLabels: {}
     additionalAnnotations: {}
