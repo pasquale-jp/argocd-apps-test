@@ -63,19 +63,3 @@ projects:
         kind: '*'
     orphanedResources:
       warn: false
-  - name: jp-system
-    namespace: argocd
-    additionalLabels: {}
-    additionalAnnotations: {}
-    description: ArgoCD Project
-    sourceRepos:
-      - https://argoproj.github.io/argo-helm
-      - https://github.com/pasquale-jp/argocd-apps-test.git
-    destinations:
-      - namespace: argocd
-        server: https://kubernetes.default.svc
-    clusterResourceWhitelist:
-      - group: '*'
-        kind: '*'
-    orphanedResources:
-      warn: false
