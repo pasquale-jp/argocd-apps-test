@@ -55,7 +55,7 @@ applications:
     sources:
       - path: chart
         repoURL: https://github.com/henrywhitaker3/generic-helm-chart
-        targetRevision: v1.3.3
+        targetRevision: 5110b3ce43d9e5fb681de48119a5b0f0a1e329f3
     syncPolicy:
       automated:
         selfHeal: true
