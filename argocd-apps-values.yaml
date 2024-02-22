@@ -54,7 +54,7 @@ applications:
     project: argocd
     sources:
       - chart: generic
-        repoURL: oci://ghcr.io/henrywhitaker3/generic
+        repoURL: oci://ghcr.io/henrywhitaker3
         targetRevision: 1.3.3
     syncPolicy:
       automated:
@@ -73,7 +73,7 @@ projects:
       - https://argoproj.github.io/argo-helm
       - https://github.com/pasquale-jp/argocd-apps-test.git
       - https://helm.nginx.com/stable
-      - oci://ghcr.io/henrywhitaker3/generic
+      - oci://ghcr.io/henrywhitaker3
     destinations:
       - namespace: argocd
         server: https://kubernetes.default.svc
