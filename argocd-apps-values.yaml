@@ -12,9 +12,9 @@ applications:
         helm:
           version: v3
           valueFiles:
-            - $values/staging/argocd/argocd-values.yaml
-      - repoURL: git@github.com:JillionPay/infra.git
-        targetRevision: dev
+            - $values/argocd-values.yaml
+      - repoURL: https://github.com/pasquale-jp/argocd-apps-test.git
+        targetRevision: HEAD
         ref: values
     syncPolicy:
       automated:
@@ -36,9 +36,9 @@ applications:
         helm:
           version: v3
           valueFiles:
-            - $values/staging/argocd/argocd-apps-values.yaml
-      - repoURL: git@github.com:JillionPay/infra.git
-        targetRevision: dev
+            - $values/argocd-apps-values.yaml
+      - repoURL: https://github.com/pasquale-jp/argocd-apps-test.git
+        targetRevision: HEAD
         ref: values
     syncPolicy:
       automated:
@@ -46,21 +46,28 @@ applications:
         prune: true
       syncOptions:
         - ApplyOutOfSyncOnly=true
-  - name: payment-service
+  - name: gloo
     namespace: argocd
     destination:
-      namespace: product
+      namespace: gloo-system
       server: https://kubernetes.default.svc
-    project: product
+    project: jp-system
     sources:
-      - path: chart
-        repoURL: https://github.com/henrywhitaker3/generic-helm-chart
-        targetRevision: 5110b3ce43d9e5fb681de48119a5b0f0a1e329f3
+      - chart: gloo
+        repoURL: https://storage.googleapis.com/solo-public-helm
+        targetRevision: v1.16.4
         helm:
           values: |
-            image:
-              repository: 381492207002.dkr.ecr.me-central-1.amazonaws.com/staging-payments
-              tag: 0.0.3
+            discovery:
+              enabled: false
+            gateway:
+              certGenJob:
+                enabled: false
+            gatewayProxies:
+              gatewayProxy:
+                disabled: true
+            settings:
+              disableKubernetesDestinations: true
     syncPolicy:
       automated:
         selfHeal: true
@@ -75,28 +82,13 @@ projects:
     additionalAnnotations: {}
     description: System services
     sourceRepos:
-      - git@github.com:JillionPay/infra.git
       - https://argoproj.github.io/argo-helm
-      - https://github.com/henrywhitaker3/generic-helm-chart
+      - https://github.com/pasquale-jp/argocd-apps-test.git
+      - https://storage.googleapis.com/solo-public-helm
     destinations:
       - namespace: argocd
         server: https://kubernetes.default.svc
-    clusterResourceWhitelist:
-      - group: '*'
-        kind: '*'
-    orphanedResources:
-      warn: false
-  - name: product
-    namespace: argocd
-    additionalLabels: {}
-    additionalAnnotations: {}
-    description: Product services
-    sourceRepos:
-      - git@github.com:JillionPay/infra.git
-      - https://argoproj.github.io/argo-helm
-      - https://github.com/henrywhitaker3/generic-helm-chart
-    destinations:
-      - namespace: product
+      - namespace: gloo-system
         server: https://kubernetes.default.svc
     clusterResourceWhitelist:
       - group: '*'
