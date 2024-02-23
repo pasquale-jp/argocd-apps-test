@@ -58,6 +58,8 @@ applications:
         targetRevision: v1.16.4
         helm:
           values: |
+            discovery:
+              enabled: false
             gateway:
               certGenJob:
                 enabled: false
