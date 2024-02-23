@@ -58,6 +58,9 @@ applications:
         targetRevision: v1.16.4
         helm:
           values: |
+            gateway:
+              certGenJob:
+                enabled: false
             gatewayProxies:
               gatewayProxy:
                 disabled: true
