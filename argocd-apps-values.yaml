@@ -56,6 +56,11 @@ applications:
       - chart: gloo
         repoURL: https://storage.googleapis.com/solo-public-helm
         targetRevision: v1.16.4
+        helm:
+          values: |
+            gatewayProxies:
+              gatewayProxy:
+                disabled: true
     syncPolicy:
       automated:
         selfHeal: true
