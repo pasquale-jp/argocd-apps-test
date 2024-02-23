@@ -66,6 +66,8 @@ applications:
             gatewayProxies:
               gatewayProxy:
                 disabled: true
+            settings:
+              disableKubernetesDestinations: true
     syncPolicy:
       automated:
         selfHeal: true
