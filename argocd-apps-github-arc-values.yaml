@@ -46,6 +46,22 @@ applications:
         prune: true
       syncOptions:
         - ApplyOutOfSyncOnly=true
+  - name: action-runner-controller
+    namespace: argocd
+    destination:
+      namespace: arc-systems
+      server: https://kubernetes.default.svc
+    project: jp-system
+    sources:
+      - chart: gha-runner-scale-set-controller
+        repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
+        targetRevision: 0.8.3
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true
+      syncOptions:
+        - ApplyOutOfSyncOnly=true
 projects:
   - name: jp-system
     namespace: argocd
@@ -56,6 +72,7 @@ projects:
       - https://argoproj.github.io/argo-helm
       - https://github.com/pasquale-jp/argocd-apps-test.git
       - https://storage.googleapis.com/solo-public-helm
+      - oci://ghcr.io/actions/actions-runner-controller-charts
     destinations:
       - namespace: argocd
         server: https://kubernetes.default.svc
