@@ -73,7 +73,7 @@ projects:
       - https://argoproj.github.io/argo-helm
       - https://github.com/pasquale-jp/argocd-apps-test.git
       - https://storage.googleapis.com/solo-public-helm
-      - oci://ghcr.io/actions/actions-runner-controller-charts
+      - ghcr.io/actions/actions-runner-controller-charts
     destinations:
       - namespace: argocd
         server: https://kubernetes.default.svc
