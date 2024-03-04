@@ -36,7 +36,7 @@ applications:
         helm:
           version: v3
           valueFiles:
-            - $values/argocd-apps-gloo-values.yaml
+            - $values/argocd-apps-github-arc-values.yaml
       - repoURL: https://github.com/pasquale-jp/argocd-apps-test.git
         targetRevision: HEAD
         ref: values
