@@ -61,6 +61,7 @@ applications:
         selfHeal: true
         prune: true
       syncOptions:
+        - CreateNamespace=true
         - ApplyOutOfSyncOnly=true
 projects:
   - name: jp-system
@@ -76,7 +77,7 @@ projects:
     destinations:
       - namespace: argocd
         server: https://kubernetes.default.svc
-      - namespace: gloo-system
+      - namespace: arc-systems
         server: https://kubernetes.default.svc
     clusterResourceWhitelist:
       - group: '*'
