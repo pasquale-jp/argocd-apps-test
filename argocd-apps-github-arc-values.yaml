@@ -64,6 +64,31 @@ applications:
         - CreateNamespace=true
         - ApplyOutOfSyncOnly=true
         - ServerSideApply=true
+  - name: arc-runner-set
+    namespace: argocd
+    destination:
+      namespace: arc-runners
+      server: https://kubernetes.default.svc
+    project: jp-system
+    sources:
+      - chart: gha-runner-scale-set
+        repoURL: ghcr.io/actions/actions-runner-controller-charts
+        targetRevision: 0.8.3
+        helm:
+          version: v3
+          values: |
+            githubConfigUrl: https://github.com/JillionPay/infra
+            githubConfigSecret: pre-defined-secret
+            controllerServiceAccount:
+              namespace: arc-systems
+              name: action-runner-controller-gha-rs-controller
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true
+      syncOptions:
+        - CreateNamespace=true
+        - ApplyOutOfSyncOnly=true
 projects:
   - name: jp-system
     namespace: argocd
@@ -77,6 +102,8 @@ projects:
       - ghcr.io/actions/actions-runner-controller-charts
     destinations:
       - namespace: argocd
+        server: https://kubernetes.default.svc
+      - namespace: arc-runners
         server: https://kubernetes.default.svc
       - namespace: arc-systems
         server: https://kubernetes.default.svc
